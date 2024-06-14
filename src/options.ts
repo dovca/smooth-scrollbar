@@ -65,6 +65,8 @@ export class Options {
    */
   readonly plugins: any = {};
 
+  readonly contentEl: HTMLElement | null = null;
+
   constructor(config: Partial<ScrollbarOptions> = {}) {
     Object.keys(config).forEach((prop) => {
       this[prop] = config[prop];

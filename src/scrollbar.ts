@@ -140,9 +140,9 @@ export class Scrollbar implements I.Scrollbar {
     options?: Partial<I.ScrollbarOptions>,
   ) {
     this.containerEl = containerEl;
-    const contentEl = this.contentEl = document.createElement('div');
-
     this.options = new Options(options);
+
+    const contentEl = this.contentEl = this.options.contentEl || document.createElement('div');
 
     // mark as a scroll element
     containerEl.setAttribute('data-scrollbar', 'true');
@@ -161,13 +161,15 @@ export class Scrollbar implements I.Scrollbar {
     }
 
     // mount content
-    contentEl.className = 'scroll-content';
+	  if (!this.options.contentEl) {
+		  contentEl.className = 'scroll-content';
 
-    Array.from(containerEl.childNodes).forEach((node) => {
-      contentEl.appendChild(node);
-    });
+		  Array.from(containerEl.childNodes).forEach((node) => {
+			  contentEl.appendChild(node);
+		  });
 
-    containerEl.appendChild(contentEl);
+		  containerEl.appendChild(contentEl);
+	  }
 
     // attach track
     this.track = new TrackController(this);
@@ -383,15 +385,17 @@ export class Scrollbar implements I.Scrollbar {
     scrollbarMap.delete(this.containerEl);
 
     // restore contents
-    const childNodes = Array.from(contentEl.childNodes);
+	  if (!this.options.contentEl) {
+		  const childNodes = Array.from(contentEl.childNodes);
 
-    while (containerEl.firstChild) {
-      containerEl.removeChild(containerEl.firstChild);
-    }
+		  while (containerEl.firstChild) {
+			  containerEl.removeChild(containerEl.firstChild);
+		  }
 
-    childNodes.forEach((el) => {
-      containerEl.appendChild(el);
-    });
+		  childNodes.forEach((el) => {
+			  containerEl.appendChild(el);
+		  });
+	  }
 
     // reset scroll position
     setStyle(containerEl, {
