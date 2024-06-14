@@ -161,14 +161,14 @@ export class Scrollbar implements I.Scrollbar {
     }
 
     // mount content
-	  if (!this.options.contentEl) {
-		  contentEl.className = 'scroll-content';
+    if (!this.options.contentEl) {
+      contentEl.className = 'scroll-content';
 
-		  Array.from(containerEl.childNodes).forEach((node) => {
-			  contentEl.appendChild(node);
-		  });
+      Array.from(containerEl.childNodes).forEach((node) => {
+        contentEl.appendChild(node);
+      });
 
-		  containerEl.appendChild(contentEl);
+      containerEl.appendChild(contentEl);
 	  }
 
     // attach track
@@ -385,17 +385,17 @@ export class Scrollbar implements I.Scrollbar {
     scrollbarMap.delete(this.containerEl);
 
     // restore contents
-	  if (!this.options.contentEl) {
-		  const childNodes = Array.from(contentEl.childNodes);
+    if (!this.options.contentEl) {
+      const childNodes = Array.from(contentEl.childNodes);
 
-		  while (containerEl.firstChild) {
-			  containerEl.removeChild(containerEl.firstChild);
-		  }
+      while (containerEl.firstChild) {
+        containerEl.removeChild(containerEl.firstChild);
+      }
 
-		  childNodes.forEach((el) => {
-			  containerEl.appendChild(el);
-		  });
-	  }
+      childNodes.forEach((el) => {
+        containerEl.appendChild(el);
+      });
+    }
 
     // reset scroll position
     setStyle(containerEl, {

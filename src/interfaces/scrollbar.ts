@@ -44,8 +44,10 @@ export type ScrollbarOptions = {
    * Options for plugins, see {@link https://github.com/idiotWu/smooth-scrollbar/blob/develop/docs/plugin.md Plugin System}.
    */
   plugins: any,
-
-	contentEl?: HTMLElement,
+  /**
+   * When provided, no additional elements will be created. This should be a direct child of the container.
+   */
+  contentEl: HTMLElement | null,
 };
 
 // Scrollbar.size
